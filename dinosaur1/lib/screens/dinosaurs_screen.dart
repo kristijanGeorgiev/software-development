@@ -16,7 +16,7 @@ class DinosaursScreen extends StatelessWidget {
     }).toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text('Dinosaurs')),
+      appBar: AppBar(title: Text(species.title)),
       body: ListView.builder(
         itemCount: dinosaurSpecies.length,
         itemBuilder: (ctx, index) {
