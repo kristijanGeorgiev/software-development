@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
-import '../models/species.dart';
 import '../screens/dinosaurs_screen.dart'; // Import the MealScreen
 
 class SpeciesWidget extends StatelessWidget {
-  final Species species;
+  final String id;
+  final String title;
+  final Color color;
+  const SpeciesWidget(this.id, this.title, this.color);
 
-  const SpeciesWidget({super.key, required this.species});
-
-  void _selectSpecies(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (ctx) => DinosaursScreen(species: species),
-      ),
+  void selectSpecies(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      DinosaursScreen.routeName,
+      arguments: {
+        'id': id,
+        'title': title,
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selectSpecies(context), // Navigate on tap
+      onTap: () => selectSpecies(context), // Navigate on tap
       borderRadius: BorderRadius.circular(15),
       splashColor: Colors.black26,
       child: Card(
-        color: species.color,
+        color: color,
         elevation: 4.0,
         margin: EdgeInsets.all(10.0),
         child: Column(
           children: [
             ListTile(
               title: Text(
-                '${species.id} ${species.title}',
+                '${id} ${title}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
